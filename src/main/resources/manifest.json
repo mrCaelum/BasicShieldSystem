@@ -1,0 +1,9 @@
+{
+  "Group": "com.mrcaelum",
+  "Name": "BasicShieldSystem",
+  "Version": "0.0.1",
+  "Description": "Basic Shield System for Hytale",
+  "Authors": [{"Name": "mrCaelum"}],
+  "Main": "com.mrcaelum.basicshieldsystem.BasicShieldSystemPlugin",
+  "LoadOrder": "POSTWORLD"
+}
