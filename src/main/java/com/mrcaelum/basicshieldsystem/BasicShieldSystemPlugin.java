@@ -32,14 +32,10 @@ import java.util.logging.Level;
  * @version 0.0.1
  */
 public class BasicShieldSystemPlugin extends JavaPlugin {
-    private static final int HEALTH_STAT_INDEX =
-            EntityStatType.getAssetMap().getIndex("Health");
-    private static final int SHIELD_STAT_INDEX =
-            EntityStatType.getAssetMap().getIndex("Shield");
     private static final Map<PlayerRef, ShieldHud> playerRefShieldHudMap = new HashMap<>();
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private static BasicShieldSystemPlugin instance;
-    private static ShieldHudUpdateSystem shieldHudUpdateSystem = null;
+    private ShieldHudUpdateSystem shieldHudUpdateSystem = null;
 
     public BasicShieldSystemPlugin(@Nonnull JavaPluginInit init) {
         super(init);
@@ -53,6 +49,8 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
     @Override
     protected void setup() {
         LOGGER.at(Level.INFO).log("Setting up...");
+        int healthStatIndex = EntityStatType.getAssetMap().getIndex("Health");
+        int shieldStatIndex = EntityStatType.getAssetMap().getIndex("Shield");
 
         EventRegistry eventBus = getEventRegistry();
         try {
@@ -64,13 +62,13 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
         }
 
         getEntityStoreRegistry().registerSystem(new FlatShieldDamageSystem(
-                SHIELD_STAT_INDEX
+                shieldStatIndex
         ));
 
         if (shieldHudUpdateSystem == null) {
             shieldHudUpdateSystem = new ShieldHudUpdateSystem(
-                    SHIELD_STAT_INDEX,
-                    HEALTH_STAT_INDEX,
+                    shieldStatIndex,
+                    healthStatIndex,
                     playerRefShieldHudMap
             );
             getEntityStoreRegistry().registerSystem(shieldHudUpdateSystem);

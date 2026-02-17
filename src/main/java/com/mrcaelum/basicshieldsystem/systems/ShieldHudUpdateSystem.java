@@ -67,8 +67,8 @@ public final class ShieldHudUpdateSystem extends EntityTickingSystem<EntityStore
         ShieldHud hud = hudMap.get(playerRef);
         if (hud == null) return;
 
-        EntityStatValue shield = statMap.get(shieldStatIndex);
         EntityStatValue health = statMap.get(healthStatIndex);
+        EntityStatValue shield = statMap.get(shieldStatIndex);
         if (shield == null || health == null) return;
 
         float current = shield.get();
