@@ -2,9 +2,9 @@
   "groupId": "com.mrcaelum",
   "artifactId": "basicshieldsystem",
   "modName": "BasicShieldSystem",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "buildSystem": "Gradle",
   "language": "Java",
-  "jarPath": "build/libs/basicshieldsystem-0.0.1.jar",
+  "jarPath": "build/libs/basicshieldsystem-0.0.2.jar",
   "buildTask": "shadowJar"
 }

@@ -31,7 +31,7 @@ import java.util.logging.Level;
  * BasicShieldSystem - Basic Shield System for Hytale
  *
  * @author mrCaelum
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class BasicShieldSystemPlugin extends JavaPlugin {
     private static final Map<PlayerRef, ShieldHud> playerRefShieldHudMap = new HashMap<>();

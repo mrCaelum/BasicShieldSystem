@@ -1,12 +1,18 @@
 {
   "Group": "com.mrcaelum",
   "Name": "BasicShieldSystem",
-  "Version": "0.0.1",
+  "Version": "0.0.2",
   "Description": "Basic Shield System for Hytale",
-  "Authors": [{"Name": "mrCaelum"}],
+  "Authors": [
+    {
+      "Name": "mrCaelum",
+      "Email": "mrcaelum/contact@slmail.me",
+      "Url": "https://www.curseforge.com/hytale/mods/simpleshieldsystem"
+    }
+  ],
   "Main": "com.mrcaelum.basicshieldsystem.BasicShieldSystemPlugin",
   "LoadOrder": "POSTWORLD",
-  "ServerVersion": "2026.02.17-255364b8e",
+  "ServerVersion": "2026.02.18-f3b8fff95",
   "OptionalDependencies": {
     "com.buuz135:MultipleHUD": ">=1.0.5"
   },
