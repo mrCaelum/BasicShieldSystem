@@ -3,5 +3,5 @@
   "Min": 0,
   "Max": 100,
   "Shared": true,
-  "ResetType": "MaxValue"
+  "ResetType": "InitialValue"
 }

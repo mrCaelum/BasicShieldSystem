@@ -1,6 +1,8 @@
 package com.mrcaelum.basicshieldsystem;
 
 import com.buuz135.mhud.MultipleHUD;
+import com.hypixel.hytale.assetstore.AssetMap;
+import com.hypixel.hytale.assetstore.event.LoadedAssetsEvent;
 import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -35,7 +37,7 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
     private static final Map<PlayerRef, ShieldHud> playerRefShieldHudMap = new HashMap<>();
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private static BasicShieldSystemPlugin instance;
-    private ShieldHudUpdateSystem shieldHudUpdateSystem = null;
+    private static ShieldHudUpdateSystem shieldHudUpdateSystem = null;
 
     public BasicShieldSystemPlugin(@Nonnull JavaPluginInit init) {
         super(init);
@@ -49,29 +51,14 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
     @Override
     protected void setup() {
         LOGGER.at(Level.INFO).log("Setting up...");
-        int healthStatIndex = EntityStatType.getAssetMap().getIndex("Health");
-        int shieldStatIndex = EntityStatType.getAssetMap().getIndex("Shield");
-
         EventRegistry eventBus = getEventRegistry();
         try {
+            eventBus.registerGlobal(LoadedAssetsEvent.class, this::onAssetsLoaded);
             eventBus.registerGlobal(PlayerReadyEvent.class, this::onPlayerReady);
             eventBus.registerGlobal(PlayerDisconnectEvent.class, this::onPlayerDisconnect);
             LOGGER.at(Level.INFO).log("Registered player event listeners");
         } catch (Exception e) {
             LOGGER.at(Level.WARNING).withCause(e).log("Failed to register player event listeners");
-        }
-
-        getEntityStoreRegistry().registerSystem(new FlatShieldDamageSystem(
-                shieldStatIndex
-        ));
-
-        if (shieldHudUpdateSystem == null) {
-            shieldHudUpdateSystem = new ShieldHudUpdateSystem(
-                    shieldStatIndex,
-                    healthStatIndex,
-                    playerRefShieldHudMap
-            );
-            getEntityStoreRegistry().registerSystem(shieldHudUpdateSystem);
         }
         LOGGER.at(Level.INFO).log("Setup complete!");
     }
@@ -85,6 +72,39 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
     protected void shutdown() {
         LOGGER.at(Level.INFO).log("Shutting down...");
         instance = null;
+    }
+
+    /**
+     * Handle player ready event.
+     * @param event The player ready event
+     */
+    @SuppressWarnings("rawtypes")
+    private void onAssetsLoaded(LoadedAssetsEvent event) {
+        if (event.getAssetClass() != EntityStatType.class) {
+            return;
+        }
+
+        @SuppressWarnings("unchecked")
+        Map<String, EntityStatType> loadedAssets = (Map<String, EntityStatType>) event.getLoadedAssets();
+
+        if (!loadedAssets.containsKey("Shield")) {
+            return;
+        }
+
+        int shieldStatIndex = EntityStatType.getAssetMap().getIndex("Shield");
+
+        getEntityStoreRegistry().registerSystem(
+                new FlatShieldDamageSystem(shieldStatIndex)
+        );
+        if (shieldHudUpdateSystem == null) {
+            shieldHudUpdateSystem = new ShieldHudUpdateSystem(
+                    shieldStatIndex,
+                    EntityStatType.getAssetMap().getIndex("Health"),
+                    playerRefShieldHudMap
+            );
+            getEntityStoreRegistry().registerSystem(shieldHudUpdateSystem);
+        }
+        LOGGER.at(Level.INFO).log("Registered \"Shield\" stat with index " + shieldStatIndex);
     }
 
     /**

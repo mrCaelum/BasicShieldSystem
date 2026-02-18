@@ -5,5 +5,11 @@
   "Description": "Basic Shield System for Hytale",
   "Authors": [{"Name": "mrCaelum"}],
   "Main": "com.mrcaelum.basicshieldsystem.BasicShieldSystemPlugin",
-  "LoadOrder": "POSTWORLD"
+  "LoadOrder": "POSTWORLD",
+  "ServerVersion": "2026.02.17-255364b8e",
+  "OptionalDependencies": {
+    "com.buuz135:MultipleHUD": ">=1.0.5"
+  },
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true
 }
