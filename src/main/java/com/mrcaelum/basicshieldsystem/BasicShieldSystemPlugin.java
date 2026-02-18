@@ -152,7 +152,6 @@ public class BasicShieldSystemPlugin extends JavaPlugin {
     private void onPlayerDisconnect(PlayerDisconnectEvent event) {
         PlayerRef playerRef = event.getPlayerRef();
 
-        shieldHudUpdateSystem.removePlayerData(playerRef);
         playerRefShieldHudMap.remove(playerRef);
     }
 }

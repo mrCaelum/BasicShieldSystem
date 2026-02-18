@@ -15,10 +15,12 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.mrcaelum.basicshieldsystem.ui.ShieldHud;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Map;
 
 public final class ShieldHudUpdateSystem extends EntityTickingSystem<EntityStore> {
+
+    private static final float SPEED = 8f;
+    private static final float EPSILON = 0.001f;
 
     private final ComponentType<EntityStore, EntityStatMap> STAT_MAP;
     private final ComponentType<EntityStore, Player> PLAYER;
@@ -26,7 +28,6 @@ public final class ShieldHudUpdateSystem extends EntityTickingSystem<EntityStore
 
     private final int shieldStatIndex;
     private final Map<PlayerRef, ShieldHud> hudMap;
-    private final Map<PlayerRef, Float> lastShieldValues = new HashMap<>();
 
     public ShieldHudUpdateSystem(
             int shieldStatIndex,
@@ -70,21 +71,17 @@ public final class ShieldHudUpdateSystem extends EntityTickingSystem<EntityStore
         float current = shield.get();
         float max = shield.getMax();
         float normalized = max <= 0 ? 0f : current / max;
+        float actual = hud.getShieldValue();
 
-        Float last = lastShieldValues.get(playerRef);
-        if (last != null && Float.compare(last, normalized) == 0) {
-            return;
-        }
+        if (actual == normalized) return;
 
-        lastShieldValues.put(playerRef, normalized);
+        float delta = normalized - actual;
+        float displayValue = Math.abs(delta) < EPSILON ? normalized
+                : actual + (delta * Math.min(1f, SPEED * dt));
 
         UICommandBuilder builder = new UICommandBuilder();
-        hud.setShieldValue(normalized, builder);
+        hud.setShieldValue(displayValue, builder);
         hud.update(false, builder);
-    }
-
-    public void removePlayerData(PlayerRef playerRef) {
-        lastShieldValues.remove(playerRef);
     }
 }
 

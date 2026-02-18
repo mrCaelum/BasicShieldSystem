@@ -7,8 +7,11 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 public class ShieldHud extends CustomUIHud {
 
+    private float currentShieldValue;
+
     public ShieldHud(@NonNullDecl PlayerRef playerRef) {
         super(playerRef);
+        currentShieldValue = 0f;
     }
 
     @Override
@@ -17,8 +20,13 @@ public class ShieldHud extends CustomUIHud {
         setShieldValue(0.0f, builder);
     }
 
+    public float getShieldValue() {
+        return currentShieldValue;
+    }
+
     public void setShieldValue(float shieldValue, UICommandBuilder builder) {
         builder.set("#ShieldBar.Visible", shieldValue > 0);
         builder.set("#ProgressBarShield.Value", shieldValue);
+        currentShieldValue = shieldValue;
     }
 }
