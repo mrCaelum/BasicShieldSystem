@@ -6,10 +6,10 @@
   "Authors": [
     {
       "Name": "mrCaelum",
-      "Email": "mrcaelum/contact@slmail.me",
-      "Url": "https://www.curseforge.com/hytale/mods/simpleshieldsystem"
+      "Email": "mrcaelum/contact@slmail.me"
     }
   ],
+  "Website": "https://www.curseforge.com/hytale/mods/simpleshieldsystem",
   "Main": "com.mrcaelum.simpleshieldsystem.SimpleShieldSystemPlugin",
   "LoadOrder": "POSTWORLD",
   "ServerVersion": "2026.02.19-1a311a592",
