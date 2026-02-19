@@ -1,22 +1,16 @@
 {
   "InitialValue": 0,
-  "Min": 0,
-  "Max": 100,
+  "Min": -60,
+  "Max": 0,
   "Shared": true,
-  "ResetType": "InitialValue",
   "Regenerating": [
     {
       "Interval": 0.1,
-      "Amount": -1,
+      "Amount": 0.1,
       "RegenType": "Additive",
       "Conditions": [
         {
           "Id": "Alive"
-        },
-        {
-          "Id": "Stat",
-          "Stat": "ShieldDecayDelay",
-          "Amount": 0
         }
       ]
     }
