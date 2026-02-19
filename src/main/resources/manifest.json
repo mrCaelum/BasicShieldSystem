@@ -11,7 +11,6 @@
   ],
   "Website": "https://www.curseforge.com/hytale/mods/simpleshieldsystem",
   "Main": "com.mrcaelum.simpleshieldsystem.SimpleShieldSystemPlugin",
-  "LoadOrder": "POSTWORLD",
   "ServerVersion": "2026.02.19-1a311a592",
   "OptionalDependencies": {
     "com.buuz135:MultipleHUD": ">=1.0.6"
