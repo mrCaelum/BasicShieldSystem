@@ -12,7 +12,7 @@
   ],
   "Main": "com.mrcaelum.simpleshieldsystem.SimpleShieldSystemPlugin",
   "LoadOrder": "POSTWORLD",
-  "ServerVersion": "2026.02.18-f3b8fff95",
+  "ServerVersion": "2026.02.19-1a311a592",
   "OptionalDependencies": {
     "com.buuz135:MultipleHUD": ">=1.0.6"
   },

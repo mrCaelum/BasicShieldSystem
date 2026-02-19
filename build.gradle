@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     // Hytale Server API from official Maven repository
-    compileOnly 'com.hypixel.hytale:Server:2026.02.18-f3b8fff95'
+    compileOnly 'com.hypixel.hytale:Server:2026.02.19-1a311a592'
     // MultipleHUD
     implementation 'com.buuz135:MultipleHUD:1.0.6'
     // JSR305 annotations (@Nonnull, @Nullable)
